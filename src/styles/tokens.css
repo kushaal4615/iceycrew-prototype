@@ -1,0 +1,229 @@
+/* ICEYCREW · AI Style Assistant tokens.
+   Direction: "GALLERY GOLD", a custom row derived from the client's own
+   brief (§6 Design: off-white #FAFAF8, near-black #111111, grey #8A8A8A,
+   one accent = the IceyCrew logo colour, the gold #E6B316 taken from the
+   store's "IC" diamond mark) and the brief's instruction that the
+   photography is the hero. Playfair Display (display serif, like the "IC"
+   of the mark) + Outfit (the store's own text face) + DM Mono (meta).
+   Radius hierarchy 22 / 16 / 12 / 999, fluid-liquid motion.
+   Three layers: primitive → semantic → component. Every surface token
+   ships with its paired foreground (on-*) token. Single LIGHT theme
+   (dark mode is a Figma deliverable, not part of this demo).
+   Score bands (strong / good / work) are first-class tokens because the
+   product's signature device, the Ice Ring, is built on them. */
+
+:root {
+  /* ── Primitives ─────────────────────────────────────────── */
+  --paper-50: #fafaf8;   /* base: the brief's off-white */
+  --paper-0: #ffffff;    /* surface */
+  --paper-100: #f4f4f1;  /* raised */
+  --paper-200: #ececE8;  /* high / sunk */
+  --paper-300: #dcdcd6;
+  --paper-400: #c2c2bb;
+  --paper-500: #8a8a8a;  /* the brief's grey: decoration and on-dark only */
+
+  --ink-900: #111111;    /* the brief's near-black */
+  --ink-950: #0a0a0a;    /* night */
+  --ink-800: #1f1f1e;
+  --ink-700: #2b2b2a;
+  --ink-text-2: #5e5e5a; /* 6.6:1 on paper */
+  --ink-text-3: #6e6e69; /* 5.1:1 on paper */
+
+  --gold-50: #fdf8e4;
+  --gold-100: #fbf1cc;   /* accent soft */
+  --gold-200: #f6e39a;
+  --gold-300: #f2cf55;   /* gold as text/line on ink and night: 11.3:1 */
+  --gold-500: #e6b316;   /* the logo gold: accent fill, ink text 9.9:1 */
+  --gold-600: #c99a0c;
+  --gold-700: #8a6a00;   /* gold as text on paper: 5.4:1 */
+  --gold-800: #5c4600;
+
+  --ruby-500: #c8333f;   /* danger / refused */
+  --ruby-600: #a8232f;
+  --ruby-100: #fadcdf;
+  --ruby-800: #6c1620;
+
+  --blue-500: #2332d5;   /* info: the store's link blue */
+  --blue-100: #e4e7ff;
+  --blue-800: #141d7a;
+
+  --green-600: #1b8a5a;  /* success */
+  --green-100: #d9f2e5;
+  --green-800: #0f4f33;
+
+  /* ── Semantic ───────────────────────────────────────────── */
+  --bg: var(--paper-50);
+  --bg-sunk: var(--paper-200);
+  --surface: var(--paper-0);
+  --surface-raised: var(--paper-100);
+  --surface-high: var(--paper-200);
+  --surface-tint: color-mix(in oklch, var(--gold-500) 7%, var(--paper-50));
+
+  --text: var(--ink-900);
+  --text-2: var(--ink-text-2);
+  --text-3: var(--ink-text-3);
+  --rule: rgb(17 17 17 / 0.08);
+  --rule-strong: rgb(17 17 17 / 0.18);
+
+  /* paired surfaces */
+  --ink: var(--ink-900);
+  --on-ink: #fafaf8;
+  --on-ink-2: #b5b5b0;   /* 8.6:1 on ink */
+
+  --night: var(--ink-950);
+  --on-night: #fafaf8;
+  --on-night-2: #a8a8a3;
+
+  --accent: var(--gold-500);
+  --on-accent: #111111;
+  --on-accent-2: #4a3a00; /* 6.1:1 on gold */
+  --accent-text: var(--gold-700);
+  --accent-soft: var(--gold-100);
+  --on-accent-soft: var(--gold-800);
+
+  --gold: var(--gold-500);
+  --on-gold: var(--ink-950);
+  --gold-text: var(--gold-700);
+  --gold-soft: var(--gold-100);
+  --on-gold-soft: var(--gold-800);
+  --gold-light: var(--gold-300); /* gold used as text/line on ink and night */
+
+  /* score bands: the Ice Ring */
+  --strong: var(--gold-500);
+  --strong-soft: var(--gold-100);
+  --on-strong-soft: var(--gold-800);
+  --good: var(--ink-900);
+  --good-soft: #e6e6e2;
+  --on-good-soft: var(--ink-900);
+  --work: var(--ruby-500);
+  --work-soft: var(--ruby-100);
+  --on-work-soft: var(--ruby-800);
+  --blocked: var(--paper-300);
+
+  --warn: var(--gold-700);
+  --on-warn: #fff8e0;
+  --warn-soft: var(--gold-100);
+  --on-warn-soft: var(--gold-800);
+
+  --danger: var(--ruby-500);
+  --on-danger: #ffffff;
+  --danger-text: var(--ruby-600);
+  --danger-soft: var(--ruby-100);
+  --on-danger-soft: var(--ruby-800);
+
+  --info: var(--blue-500);
+  --info-soft: var(--blue-100);
+  --on-info-soft: var(--blue-800);
+
+  --success: var(--green-600);
+  --success-soft: var(--green-100);
+  --on-success-soft: var(--green-800);
+
+  /* ── Radius hierarchy: container > card > control > chip ── */
+  --r-container: 22px;
+  --r-card: 16px;
+  --r-control: 12px;
+  --r-chip: 999px;
+
+  /* ── Elevation: base / raised / floating ── */
+  --shadow-raised: 0 1px 2px rgb(17 17 17 / 0.04), 0 8px 24px -10px rgb(17 17 17 / 0.12);
+  --shadow-floating: 0 2px 4px rgb(17 17 17 / 0.05), 0 18px 44px -14px rgb(17 17 17 / 0.26);
+  --shadow-well: inset 0 1px 2px rgb(17 17 17 / 0.07), inset 0 0 0 1px rgb(17 17 17 / 0.05);
+  --glow-accent: 0 12px 32px -12px rgb(230 179 22 / 0.7);
+  --glow-gold: 0 12px 32px -12px rgb(230 179 22 / 0.7);
+  --glow-ink: 0 12px 32px -12px rgb(17 17 17 / 0.5);
+
+  /* ── Type ───────────────────────────────────────────────── */
+  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-text: 'Outfit', -apple-system, system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
+
+  /* scale: 11 / 13 / 15 / 17 / 22 / 34 / 56 / 80 */
+  --t-11: 11px;
+  --t-13: 13px;
+  --t-15: 15px;
+  --t-17: 17px;
+  --t-22: 22px;
+  --t-34: 34px;
+  --t-56: 56px;
+  --t-80: 80px;
+
+  /* ── Motion ─────────────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* ── Viewer chrome ──────────────────────────────────────── */
+  --stage: #e9e8e3;
+  --glass: rgb(255 255 255 / 0.78);
+  --glass-edge: rgb(255 255 255 / 0.95);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-sunk: var(--bg-sunk);
+  --color-surface: var(--surface);
+  --color-raised: var(--surface-raised);
+  --color-high: var(--surface-high);
+  --color-tint: var(--surface-tint);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-ink: var(--ink);
+  --color-on-ink: var(--on-ink);
+  --color-on-ink-2: var(--on-ink-2);
+  --color-night: var(--night);
+  --color-on-night: var(--on-night);
+  --color-on-night-2: var(--on-night-2);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-text);
+  --color-on-accent: var(--on-accent);
+  --color-on-accent-2: var(--on-accent-2);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent-soft: var(--on-accent-soft);
+  --color-gold: var(--gold);
+  --color-on-gold: var(--on-gold);
+  --color-gold-ink: var(--gold-text);
+  --color-gold-soft: var(--gold-soft);
+  --color-on-gold-soft: var(--on-gold-soft);
+  --color-gold-light: var(--gold-light);
+  --color-strong: var(--strong);
+  --color-strong-soft: var(--strong-soft);
+  --color-on-strong-soft: var(--on-strong-soft);
+  --color-good: var(--good);
+  --color-good-soft: var(--good-soft);
+  --color-on-good-soft: var(--on-good-soft);
+  --color-work: var(--work);
+  --color-work-soft: var(--work-soft);
+  --color-on-work-soft: var(--on-work-soft);
+  --color-blocked: var(--blocked);
+  --color-warn: var(--warn);
+  --color-on-warn: var(--on-warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-on-warn-soft: var(--on-warn-soft);
+  --color-danger: var(--danger);
+  --color-on-danger: var(--on-danger);
+  --color-danger-text: var(--danger-text);
+  --color-danger-soft: var(--danger-soft);
+  --color-on-danger-soft: var(--on-danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-on-info-soft: var(--on-info-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-on-success-soft: var(--on-success-soft);
+  --color-stage: var(--stage);
+
+  --font-display: var(--font-display);
+  --font-text: var(--font-text);
+  --font-mono: var(--font-mono);
+
+  --radius-container: var(--r-container);
+  --radius-card: var(--r-card);
+  --radius-control: var(--r-control);
+  --radius-chip: var(--r-chip);
+
+  --shadow-raised: var(--shadow-raised);
+  --shadow-floating: var(--shadow-floating);
+}
