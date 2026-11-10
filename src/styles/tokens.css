@@ -7,8 +7,11 @@
    of the mark) + Outfit (the store's own text face) + DM Mono (meta).
    Radius hierarchy 22 / 16 / 12 / 999, fluid-liquid motion.
    Three layers: primitive → semantic → component. Every surface token
-   ships with its paired foreground (on-*) token. Single LIGHT theme
-   (dark mode is a Figma deliverable, not part of this demo).
+   ships with its paired foreground (on-*) token. LIGHT by default; the
+   brief asks for light and dark mode, so [data-theme='dark'] on any
+   ancestor (the viewer puts it on the product root) remaps every
+   semantic token. Primitives never change; night surfaces and the gold
+   stay the same in both themes.
    Score bands (strong / good / work) are first-class tokens because the
    product's signature device, the Ice Ring, is built on them. */
 
@@ -156,6 +159,69 @@
   --stage: #e9e8e3;
   --glass: rgb(255 255 255 / 0.78);
   --glass-edge: rgb(255 255 255 / 0.95);
+}
+
+/* ── DARK MODE (brief §6: "Light and dark mode") ───────────────────
+   Scoped, not global: the viewer sets data-theme on the product root so
+   the device frames and the viewer chrome keep their own look. Ground is
+   the brief's near-black; cards lift one step lighter; text is the off-
+   white; gold-300 is the gold-as-text on dark (11:1); the "good" band
+   turns off-white because ink would vanish on ink. Contrast: text-2
+   8.6:1 and text-3 6.4:1 on the ground, 7:1 / 5.3:1 on a card. */
+[data-theme='dark'] {
+  --bg: var(--ink-900);
+  --bg-sunk: #0a0a0a;
+  --surface: var(--ink-800);
+  --surface-raised: #262625;
+  --surface-high: #313130;
+  --surface-tint: color-mix(in oklch, var(--gold-500) 12%, var(--ink-800));
+
+  --text: var(--paper-50);
+  --text-2: #b5b5b0;
+  --text-3: #9a9a95;
+  --rule: rgb(250 250 248 / 0.1);
+  --rule-strong: rgb(250 250 248 / 0.22);
+
+  --ink: #000000;
+  --on-ink: var(--paper-50);
+  --on-ink-2: #b5b5b0;
+
+  --accent-text: var(--gold-300);
+  --accent-soft: #3a2f0a;
+  --on-accent-soft: var(--gold-200);
+  --gold-text: var(--gold-300);
+  --gold-soft: #3a2f0a;
+  --on-gold-soft: var(--gold-200);
+
+  --good: var(--paper-50);
+  --good-soft: #313130;
+  --on-good-soft: var(--paper-50);
+  --strong-soft: #3a2f0a;
+  --on-strong-soft: var(--gold-200);
+  --work-soft: #3d151a;
+  --on-work-soft: #f3a5ad;
+  --blocked: #3a3a38;
+
+  --warn: var(--gold-300);
+  --on-warn: var(--ink-950);
+  --warn-soft: #3a2f0a;
+  --on-warn-soft: var(--gold-200);
+  --danger-text: #f08a96;
+  --danger-soft: #3d151a;
+  --on-danger-soft: #f3a5ad;
+  --info-soft: #1b2050;
+  --on-info-soft: #c3c9ff;
+  --success-soft: #11331f;
+  --on-success-soft: #9fe0bb;
+
+  --shadow-raised: 0 0 0 1px rgb(250 250 248 / 0.06), 0 8px 24px -10px rgb(0 0 0 / 0.6);
+  --shadow-floating: 0 0 0 1px rgb(250 250 248 / 0.08), 0 18px 44px -14px rgb(0 0 0 / 0.8);
+  --shadow-well: inset 0 1px 2px rgb(0 0 0 / 0.5), inset 0 0 0 1px rgb(250 250 248 / 0.06);
+  --glow-ink: 0 12px 32px -12px rgb(0 0 0 / 0.8);
+
+  --glass: rgb(31 31 30 / 0.82);
+  --glass-edge: rgb(250 250 248 / 0.1);
+  color-scheme: dark;
 }
 
 @theme inline {

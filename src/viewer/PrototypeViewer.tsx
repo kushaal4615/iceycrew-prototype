@@ -8,7 +8,7 @@ import { spring } from '../motion/springs'
 import { reducedScreenVariants, screenVariants } from '../motion/transitions'
 import { useReducedMotion } from '../motion/useReducedMotion'
 import { setScreen, track } from '../lib/tracker'
-import { getSession } from '../lib/store'
+import { getSession, session, useSession } from '../lib/store'
 import { FeaturePanel, PANEL_GAP, PANEL_W, PANEL_W_COLLAPSED } from './FeaturePanel'
 import { FullFeatureList } from './FullFeatureList'
 import { PlatformTabs } from './PlatformTabs'
@@ -52,6 +52,7 @@ export function PrototypeViewer() {
   const toastTimer = useRef<number | undefined>(undefined)
   const reduce = useReducedMotion()
   const mode = useViewerMode()
+  const theme = useSession((s) => s.theme)
 
   const lastPlatform = useRef<Platform>(view === 'features' ? 'app' : view)
   if (view !== 'features') lastPlatform.current = view
@@ -207,7 +208,8 @@ export function PrototypeViewer() {
         initial="initial"
         animate="enter"
         exit="exit"
-        className="absolute inset-0"
+        data-theme={theme}
+        className="absolute inset-0 bg-[var(--bg)] text-text"
       >
         <ScreenBoundary id={current}>
           <BlankGuard id={current}>
@@ -229,6 +231,11 @@ export function PrototypeViewer() {
           onChangeView={(v) => setView(v)}
           onJump={jumpTo}
           toast={toastState}
+          theme={theme}
+          onToggleTheme={() => {
+            track('toggle_theme', theme === 'dark' ? 'light' : 'dark')
+            session.toggleTheme()
+          }}
         />
       </NavContext.Provider>
     )
@@ -260,7 +267,7 @@ export function PrototypeViewer() {
               >
                 {scale > 0 &&
                   (frameKind === 'phone' ? (
-                    <IPhone16Pro statusTone={def.statusTone ?? 'light'} island={island}>
+                    <IPhone16Pro statusTone={theme === 'dark' ? 'light' : (def.statusTone ?? 'light')} island={island}>
                       {screenNode}
                     </IPhone16Pro>
                   ) : (

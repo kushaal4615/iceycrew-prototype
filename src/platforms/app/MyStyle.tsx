@@ -178,7 +178,7 @@ export default function AppMyStyle() {
               <p className="mt-1.5 text-[13px] text-on-ink-2">Eight quick questions give your undertone, colour season, a palette of best colours and the metals that suit you. Used in every analysis after.</p>
               <div className="mt-3 flex -space-x-1">
                 {DEEP_AUTUMN.palette.slice(0, 6).map((c) => (
-                  <Swatch key={c.hex} hex={c.hex} size={24} label={false} className="ring-2 ring-[var(--ink)]" />
+                  <Swatch key={c.hex} hex={c.hex} size={24} label={false} className="ring-2 ring-[var(--text)]" />
                 ))}
               </div>
               <Button block className="mt-4" icon={Palette} onClick={() => { track('colour_start', 'mystyle'); navigate('app.colourquiz') }}>

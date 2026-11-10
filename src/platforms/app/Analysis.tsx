@@ -68,7 +68,7 @@ export default function AppAnalysis() {
               <p className="label text-gold-light">{isToday ? 'Just now' : fmtUS(a.dateIso, true)} · {a.time}</p>
               <h1 className="grot mt-1 text-[30px] leading-[0.98] text-on-night">{a.title}</h1>
               <div className="mt-2.5 flex flex-wrap gap-1.5">
-                <span className="label rounded-full bg-[rgb(255_255_255/0.92)] px-2.5 py-1.5 text-text">{a.occasion ?? 'No occasion'}</span>
+                <span className="label rounded-full bg-[color-mix(in_oklch,var(--surface)_92%,transparent)] px-2.5 py-1.5 text-text">{a.occasion ?? 'No occasion'}</span>
                 {a.weather && (
                   <span className="label inline-flex items-center gap-1 rounded-full bg-[#1f1f1e] px-2.5 py-1.5 text-gold-light">
                     <MapPin size={11} aria-hidden /> {a.weather.city} · {a.weather.tempF}°F · {a.weather.summary} · {a.weather.windMph} mph
@@ -169,7 +169,7 @@ export default function AppAnalysis() {
           <div className="mt-5 flex items-center gap-3 px-5">
             <span className="flex -space-x-1">
               {DEEP_AUTUMN.palette.slice(0, 6).map((c) => (
-                <Swatch key={c.hex} hex={c.hex} size={22} label={false} className="ring-2 ring-[var(--ink)]" />
+                <Swatch key={c.hex} hex={c.hex} size={22} label={false} className="ring-2 ring-[var(--text)]" />
               ))}
             </span>
             <button type="button" onClick={() => { track('open_colours', 'analysis'); navigate('app.colours') }} className="flex h-11 items-center gap-1 text-[13px] font-bold text-gold-light">

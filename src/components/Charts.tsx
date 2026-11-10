@@ -83,38 +83,38 @@ export function BudgetBar({ regular, overtime = 0, max = 100, height = 10, marke
     <span className="relative block w-full overflow-visible rounded-full bg-[var(--surface-high)]" style={{ height }} role="img" aria-label={`${regular} used${overtime ? ` and ${overtime} pending` : ''}`}>
       <span className="absolute inset-y-0 left-0 rounded-full bg-accent" style={{ width: `${r}%` }} />
       {o > 0 && <span className="absolute inset-y-0 rounded-r-full bg-gold" style={{ left: `${r}%`, width: `${o}%` }} />}
-      <span aria-hidden className="absolute -top-1 -bottom-1 w-[2px] bg-[var(--ink)]" style={{ left: `${line}%` }} />
+      <span aria-hidden className="absolute -top-1 -bottom-1 w-[2px] bg-[var(--text)]" style={{ left: `${line}%` }} />
     </span>
   )
 }
 
 /* Recharts styling shared by the admin console. */
 export const CHART = {
-  grid: 'rgb(17 17 17 / 0.08)',
-  axis: { fontSize: 11, fill: '#5E5E5A', fontFamily: 'DM Mono, monospace' },
+  grid: 'var(--rule)',
+  axis: { fontSize: 11, fill: 'var(--text-2)', fontFamily: 'DM Mono, monospace' },
   series: {
-    primary: '#111111',
+    primary: 'var(--text)',
     secondary: '#E6B316',
     tertiary: '#8A8A8A',
     strong: '#E6B316',
-    good: '#111111',
+    good: 'var(--text)',
     work: '#C8333F',
-    active: '#111111',
+    active: 'var(--text)',
     cancelled: '#8A8A8A',
     lapsed: '#C8333F',
-    us: '#111111',
+    us: 'var(--text)',
     ca: '#E6B316',
     uk: '#8A8A8A',
     au: '#2332D5',
     warn: '#8A6A00',
     danger: '#C8333F',
-    ink: '#111111',
+    ink: 'var(--text)',
     gold: '#E6B316',
-    muted: '#DCDCD6',
+    muted: 'var(--surface-high)',
   },
   tooltip: {
     contentStyle: {
-      background: '#111111',
+      background: 'var(--ink)',
       border: 'none',
       borderRadius: 12,
       color: '#FAFAF8',
@@ -125,6 +125,6 @@ export const CHART = {
     },
     labelStyle: { color: '#B5B5B0', fontSize: 11, marginBottom: 4 },
     itemStyle: { color: '#FAFAF8', padding: 0 },
-    cursor: { stroke: 'rgb(17 17 17 / 0.3)', strokeWidth: 1 },
+    cursor: { stroke: 'var(--rule-strong)', strokeWidth: 1 },
   },
 }

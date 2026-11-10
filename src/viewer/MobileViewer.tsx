@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronUp, ListChecks, Smartphone, PanelsTopLeft, type LucideIcon } from 'lucide-react'
+import { ChevronUp, ListChecks, Moon, Smartphone, PanelsTopLeft, Sun, type LucideIcon } from 'lucide-react'
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { SCREEN_FEATURES } from '../data/screenFeatures'
 import { PLATFORMS, frameOf, type Platform, type ScreenId, type ToastTone, type View } from '../lib/navigation'
@@ -25,6 +25,8 @@ export function MobileViewer({
   onChangeView,
   onJump,
   toast,
+  theme,
+  onToggleTheme,
 }: {
   view: View
   platform: Platform
@@ -33,6 +35,8 @@ export function MobileViewer({
   onChangeView: (v: View) => void
   onJump: (id: ScreenId) => void
   toast: { id: number; message: string; tone: ToastTone } | null
+  theme: 'light' | 'dark'
+  onToggleTheme: () => void
 }) {
   const [platformsOpen, setPlatformsOpen] = useState(false)
   const [featuresOpen, setFeaturesOpen] = useState(false)
@@ -85,7 +89,7 @@ export function MobileViewer({
   const chromeBottom = dockGap !== null ? `${dockGap}px` : 'calc(max(env(safe-area-inset-bottom), 12px) + 64px + 12px)'
 
   return (
-    <div className="fixed inset-0 overflow-hidden bg-[var(--bg)] text-text" style={{ ...vars, height: '100dvh' }}>
+    <div data-theme={theme} className="fixed inset-0 overflow-hidden bg-[var(--bg)] text-text" style={{ ...vars, height: '100dvh' }}>
       {view === 'features' ? (
         <div className="absolute inset-0">
           <FullFeatureList onJump={onJump} phone />
@@ -165,6 +169,22 @@ export function MobileViewer({
       </motion.div>
 
       <PhoneSheet open={platformsOpen} onClose={() => setPlatformsOpen(false)} title="View" label="Switch platform">
+        <button
+          type="button"
+          role="switch"
+          aria-checked={theme === 'dark'}
+          onClick={onToggleTheme}
+          className="mb-3 flex min-h-[52px] w-full items-center gap-3 rounded-[16px] bg-[var(--surface-high)] px-4 py-3 text-left"
+        >
+          {theme === 'dark' ? <Sun size={20} className="shrink-0" aria-hidden /> : <Moon size={20} className="shrink-0" aria-hidden />}
+          <span className="min-w-0 flex-1">
+            <span className="block text-[16px] font-extrabold">{theme === 'dark' ? 'Dark mode' : 'Light mode'}</span>
+            <span className="block text-[13px] text-text-2">Tap to switch · the brief asks for both</span>
+          </span>
+          <span className={`relative h-7 w-12 shrink-0 rounded-full transition-colors ${theme === 'dark' ? 'bg-accent' : 'bg-[var(--paper-400)]'}`} aria-hidden>
+            <span className={`absolute top-1 h-5 w-5 rounded-full bg-white shadow transition-[left] ${theme === 'dark' ? 'left-6' : 'left-1'}`} />
+          </span>
+        </button>
         <ul className="flex flex-col gap-2">
           {[...PLATFORMS.map((p) => ({ id: p.id as View, name: p.label, sub: p.sub, icon: ICON[p.id] })), { id: 'features' as View, name: 'Full Feature List', sub: 'Every requirement, and the screen that shows it', icon: ListChecks }].map((it) => {
             const on = it.id === view

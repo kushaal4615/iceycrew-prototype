@@ -10,8 +10,21 @@ import { LIMITS, REPORTS, type ReportStatus } from '../data/admin'
    admin inbox, a limit Hazel edits shows on Maya's allowance ring. */
 
 export type Membership = 'active' | 'lapsed'
+export type Theme = 'light' | 'dark'
+
+/** ?theme=dark opens the product in dark mode (screenshots, sharing a look); the toggles change it live. */
+const initialTheme = (): Theme => {
+  try {
+    const q = new URLSearchParams(window.location.search).get('theme')
+    return q && q.startsWith('dark') ? 'dark' : 'light'
+  } catch {
+    return 'light'
+  }
+}
 
 export type SessionState = {
+  /* Appearance: the brief's light and dark mode, shared by both platforms */
+  theme: Theme
   /* Member App */
   verified: boolean
   onboardingStep: number
@@ -52,6 +65,7 @@ export type SessionState = {
 }
 
 const initial: SessionState = {
+  theme: initialTheme(),
   verified: false,
   onboardingStep: 0,
   onboardingAnswers: MAYA_ANSWERS,
@@ -116,7 +130,9 @@ const remove = (list: string[], id: string) => list.filter((x) => x !== id)
 
 export const session = {
   set,
-  reset: () => set(initial),
+  reset: () => set({ ...initial, theme: state.theme }),
+  setTheme: (t: Theme) => set({ theme: t }),
+  toggleTheme: () => set((s) => ({ theme: s.theme === 'dark' ? 'light' : 'dark' })),
   /* Member App */
   verify: () => set({ verified: true }),
   setOnboardingStep: (n: number) => set({ onboardingStep: n }),

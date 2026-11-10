@@ -118,7 +118,7 @@ export default function AdminLimits() {
         <div className="flex flex-col gap-6">
           <Panel title="AI spend cap" action={<Badge tone={spentPct >= limits.alertPct ? 'warn' : 'success'}>{spentPct}% used</Badge>}>
             <div className="flex items-center gap-5">
-              <IceRing value={spentPct} size={120} stroke={9} color={spentPct >= limits.alertPct ? 'var(--gold)' : 'var(--ink)'}>
+              <IceRing value={spentPct} size={120} stroke={9} color={spentPct >= limits.alertPct ? 'var(--gold)' : 'var(--text)'}>
                 <span className="figure num text-[30px]">{usd(KPI.spendMonth)}</span>
                 <span className="label text-text-2">of {usd(limits.spendCap)}</span>
               </IceRing>

@@ -111,7 +111,7 @@ export default function AppHome() {
             }}
             className="flex min-w-0 flex-col items-center justify-center rounded-[var(--r-card)] bg-[var(--surface)] p-3 shadow-[var(--shadow-raised)]"
           >
-            <IceRing value={(used / daily) * 100} size={78} stroke={6} color="var(--ink)" delay={0.3}>
+            <IceRing value={(used / daily) * 100} size={78} stroke={6} color="var(--text)" delay={0.3}>
               <span className="num text-[20px] font-bold leading-none">
                 {used}
                 <span className="text-[11px] font-semibold text-text-2">/{daily}</span>
@@ -182,7 +182,7 @@ export default function AppHome() {
         </motion.div>
 
         {/* ── The newsletter feed ── */}
-        <motion.div variants={listItem} className="mt-8 border-t-4 border-ink px-5 pt-5">
+        <motion.div variants={listItem} className="mt-8 border-t-4 border-[var(--text)] px-5 pt-5">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="label text-gold-ink">Style tips · from iceycrew.com</p>

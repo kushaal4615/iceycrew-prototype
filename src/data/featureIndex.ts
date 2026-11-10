@@ -247,7 +247,7 @@ export const FEATURE_INDEX: FeatureModule[] = [
       f('bottomNav', { screen: 'app.home' }),
       f('navHidden', { screen: 'app.camera' }),
       f('homeDefault', { screen: 'app.home' }),
-      f('avatarNav', { screen: 'app.account' }),
+      f('avatarNav', { screen: 'app.home' }),
     ],
   },
   {
@@ -398,7 +398,7 @@ export const FEATURE_INDEX: FeatureModule[] = [
     features: [
       f('designStyle', { screen: 'app.home' }),
       f('palette', { screen: 'app.welcome' }),
-      f('lightDark', { notBuilt: 'This demo ships the light theme; dark mode is delivered in the Figma set and the build' }),
+      f('lightDark', { screen: 'app.account' }),
       f('animations', { screen: 'app.swipe' }),
       f('figmaApproval', { notBuilt: 'A process step: all screens are approved in Figma before milestone 2 starts' }),
       f('hig', { notBuilt: 'Platform guidelines applied in the native build; the demo follows the same spacing, hit targets and contrast' }),

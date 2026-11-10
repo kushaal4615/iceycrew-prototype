@@ -30,7 +30,7 @@ export const SCREEN_FEATURES: Record<ScreenId, ScreenFeatures> = {
   'app.mystyle': app('My Style', M.mystyle, ['styleSummary', 'prefsEditable', 'recalibrate', 'myColoursCard', 'findColours', 'resultsStored']),
   'app.colourquiz': app('Find my colours', M.mystyle, ['colourQuiz', 'findColours', 'colourNeutral', 'colourDeterministic']),
   'app.colours': app('My Colours', M.mystyle, ['colourOutput', 'colourSaved', 'colourDeterministic', 'myColoursCard']),
-  'app.account': app('Account & Settings', M.account, ['avatarNav', 'profile', 'vipStatus', 'keepPhotos', 'privacyDelete', 'downloadData', 'helpLinks']),
+  'app.account': app('Account & Settings', M.account, ['profile', 'vipStatus', 'lightDark', 'keepPhotos', 'privacyDelete', 'downloadData', 'helpLinks']),
   'app.report': app('Report a problem', M.account, ['reportEntry', 'reportForm', 'reportAuto', 'reportConfirm', 'reportDelivery']),
   'app.locked': app('Membership lapsed', M.access, ['lockedScreen', 'failedPayment', 'cancellation', 'refund', 'noInAppPayments']),
 

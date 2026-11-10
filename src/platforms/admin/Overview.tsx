@@ -181,7 +181,7 @@ export default function AdminOverview() {
 
         <Panel title="AI spend">
           <div className="flex items-center gap-4">
-            <IceRing value={spendPct} size={96} stroke={8} color={spendPct >= 80 ? 'var(--gold)' : 'var(--ink)'}>
+            <IceRing value={spendPct} size={96} stroke={8} color={spendPct >= 80 ? 'var(--gold)' : 'var(--text)'}>
               <span className="num text-[22px] font-bold">{spendPct}%</span>
             </IceRing>
             <div className="min-w-0">

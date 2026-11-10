@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight, BellOff, ChevronRight, Download, FileText, Flag, Globe, KeyRound, LifeBuoy, Lock, LogOut, Shield, Trash2, UserX } from 'lucide-react'
+import { ArrowUpRight, BellOff, ChevronRight, Download, FileText, Flag, Globe, KeyRound, LifeBuoy, Lock, LogOut, Moon, Shield, Trash2, UserX } from 'lucide-react'
 import { useState } from 'react'
 import { Avatar } from '../../components/Avatar'
 import { Vip } from '../../components/Brand'
@@ -25,6 +25,7 @@ export default function AppAccount() {
   const keep = useSession((s) => s.keepPhotos)
   const deleted = useSession((s) => s.deletedPhotos)
   const membership = useSession((s) => s.membership)
+  const theme = useSession((s) => s.theme)
   const [confirm, setConfirm] = useState<'photos' | 'account' | null>(null)
 
   const Row = ({ icon: Icon, label, sub, onClick, danger = false, trailing }: { icon: typeof Lock; label: string; sub?: string; onClick: () => void; danger?: boolean; trailing?: React.ReactNode }) => (
@@ -143,6 +144,16 @@ export default function AppAccount() {
         {/* ── App ── */}
         <motion.p variants={listItem} className="label mt-6 px-5 text-text-2">App</motion.p>
         <motion.ul variants={listItem} className="mt-1 divide-y divide-[var(--rule)]">
+          <li className="flex min-h-[64px] items-center gap-3 px-5 py-2.5">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[var(--surface-high)] text-text">
+              <Moon size={17} aria-hidden />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-[15px] font-semibold">Appearance</span>
+              <span className="block text-[12.5px] leading-snug text-text-2">{theme === 'dark' ? 'Dark mode on. Every screen, both platforms.' : 'Light mode on. Dark mode re-themes every screen.'}</span>
+            </span>
+            <Toggle on={theme === 'dark'} onChange={(v) => { session.setTheme(v ? 'dark' : 'light'); track('toggle_theme', v ? 'dark' : 'light') }} label="Dark mode" />
+          </li>
           <Row icon={Globe} label="Region and formats" sub="United States · °F · 11/10/2026 · “color”" onClick={() => toast('Formats follow your device region. English only in v1; more languages later.', 'info')} />
           <Row icon={BellOff} label="Notifications" sub="In-app notices only; push arrives in a later phase" onClick={() => toast('No push at launch. Notices appear inside the app.', 'neutral')} />
           <Row icon={KeyRound} label="Password and sign-in" sub="Reset password · Apple · Google · stays linked to your order" onClick={() => { track('password_reset'); toast('Reset link sent to maya.delgado@…', 'info') }} />
