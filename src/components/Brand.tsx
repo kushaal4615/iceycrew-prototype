@@ -2,6 +2,10 @@ import { motion } from 'framer-motion'
 import { BadgeCheck, Star } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { useReducedMotion } from '../motion/useReducedMotion'
+import logo from '../assets/iceycrew-logo.png'
+
+/** width ÷ height of the logo file (268 × 216) */
+const LOGO_RATIO = 268 / 216
 
 /* THE SIGNATURE DEVICE: the Ice Ring.
    The brief's one number is "a score out of 100". Every score in the app
@@ -12,7 +16,7 @@ import { useReducedMotion } from '../motion/useReducedMotion'
    Occasion as four cells on every outfit reference, so a look is never
    just "84": it is 84 with its shape.
 
-   Mark:        the "IC" diamond from the store's logo, redrawn.
+   Mark:        the store's own logo file (gold IC + diamond) from iceycrew.com.
    Wordmark:    ICEYCREW in the store's wide uppercase.
    IceRing:     a score (0–100) in a gold ring with the diamond marker.
    ScoreStrip:  the four sub-scores as a strip.
@@ -33,16 +37,10 @@ export const BAND: Record<Band, { fill: string; soft: string; onSoft: string; la
 export const SUB_LABEL: Record<keyof SubScores, string> = { fit: 'Fit', colour: 'Colour', cohesion: 'Cohesion', occasion: 'Occasion' }
 export const SUB_KEYS: (keyof SubScores)[] = ['fit', 'colour', 'cohesion', 'occasion']
 
-/** The IC diamond mark. */
+/** The IceyCrew logo as the store uses it: the gold "IC" with the diamond, taken from iceycrew.com. `size` is the height. */
 export function Mark({ size = 24, className = '', tone = 'gold' }: { size?: number; className?: string; tone?: 'gold' | 'ink' | 'light' }) {
-  const fill = tone === 'gold' ? '#E6B316' : tone === 'light' ? '#FAFAF8' : '#111111'
-  const line = tone === 'gold' ? '#111111' : tone === 'light' ? '#111111' : '#FAFAF8'
-  return (
-    <svg width={size} height={size} viewBox="0 0 64 64" className={className} aria-hidden>
-      <path d="M32 8 56 28 32 58 8 28Z" fill={fill} />
-      <path d="M8 28h48M32 8 22 28l10 30M32 8l10 20-10 30M18 8h28l10 20H8Z" stroke={line} strokeWidth="2" fill="none" strokeLinejoin="round" />
-    </svg>
-  )
+  void tone
+  return <img src={logo} alt="" width={Math.round(size * LOGO_RATIO)} height={size} className={`inline-block shrink-0 select-none ${className}`} style={{ height: size, width: 'auto', color: 'transparent' }} draggable={false} aria-hidden />
 }
 
 export function Wordmark({ size = 14, tone = 'ink', className = '', mark = true }: { size?: number; tone?: 'ink' | 'light'; className?: string; mark?: boolean }) {
